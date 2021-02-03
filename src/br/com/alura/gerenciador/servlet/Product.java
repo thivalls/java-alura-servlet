@@ -13,18 +13,47 @@ import javax.servlet.http.HttpServletResponse;
 public class Product extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		PrintWriter output = response.getWriter();
+//		String param = request.getParameter("product");
+//		
+//		if(param != null) {
+//			output.println("<html><body><h1>Product " + param + "!!!</h1></body></html>");
+//		}else {
+//			output.println("<html><body><h1>This product is empty yet!!!</h1></body></html>");	
+//		}
+//		
+//		System.out.println("Entrei no servlet product");
+//		System.out.println(param);
+//	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter output = response.getWriter();
 		String param = request.getParameter("product");
 		
 		if(param != null) {
-			output.println("<html><body><h1>Product " + param + "!!!</h1></body></html>");
+			output.println("<html><body><h1>Mostrando produto " + param + "!!!</h1></body></html>");
 		}else {
 			output.println("<html><body><h1>This product is empty yet!!!</h1></body></html>");	
 		}
 		
-		System.out.println("Entrei no servlet product");
-		System.out.println(param);
+		System.out.println("Entrei no servlet product no método get");
 	}
-
+	
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter output = response.getWriter();
+		String param = request.getParameter("product");
+		
+		if(param != null && !param.contentEquals("")) {
+			output.println("<html><body><h1>Cadastrando Product " + param + "!!!</h1></body></html>");
+		}else {
+			output.println("<html><body><h1>Erro ao cadastrar o produto!!!</h1></body></html>");	
+		}
+		
+		System.out.println("Entrei no servlet product no método post");
+		System.out.println(param + " teste");
+	}
 }
