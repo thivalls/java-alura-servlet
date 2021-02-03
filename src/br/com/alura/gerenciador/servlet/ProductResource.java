@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.alura.gerenciador.Banco;
+import br.com.alura.gerenciador.models.Product;
+
 @WebServlet("/product")
-public class Product extends HttpServlet {
+public class ProductResource extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 //	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,25 +30,31 @@ public class Product extends HttpServlet {
 //		System.out.println(param);
 //	}
 	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter output = response.getWriter();
-		String param = request.getParameter("product");
-		
-		if(param != null) {
-			output.println("<html><body><h1>Mostrando produto " + param + "!!!</h1></body></html>");
-		}else {
-			output.println("<html><body><h1>This product is empty yet!!!</h1></body></html>");	
-		}
-		
-		System.out.println("Entrei no servlet product no método get");
-	}
-	
+//	@Override
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		PrintWriter output = response.getWriter();
+//		String param = request.getParameter("product");
+//		
+//		if(param != null) {
+//			output.println("<html><body><h1>Mostrando produto " + param + "!!!</h1></body></html>");
+//		}else {
+//			output.println("<html><body><h1>This product is empty yet!!!</h1></body></html>");	
+//		}
+//		
+//		System.out.println("Entrei no servlet product no método get");
+//	}
+//	
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter output = response.getWriter();
 		String param = request.getParameter("product");
+		
+		Product product = new Product();
+		product.setName(param);
+		
+		Banco banco = new Banco();
+		banco.save(product);
 		
 		if(param != null && !param.contentEquals("")) {
 			output.println("<html><body><h1>Cadastrando Product " + param + "!!!</h1></body></html>");
@@ -54,6 +63,6 @@ public class Product extends HttpServlet {
 		}
 		
 		System.out.println("Entrei no servlet product no método post");
-		System.out.println(param + " teste");
+		System.out.println(banco.getProducts());
 	}
 }
