@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.Banco;
-import br.com.alura.gerenciador.models.Empresa;
+import br.com.alura.gerenciador.models.Company;
 
-@WebServlet("/empresas")
-public class ListaEmpresas extends HttpServlet {
+@WebServlet("/companies")
+public class ListCompany extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Banco db = new Banco();
-		List<Empresa> empresas = db.getEmpresas();
-		request.setAttribute("empresas", empresas);
+		List<Company> companies = db.getEmpresas();
+		request.setAttribute("companies", companies);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("list-companies.jsp");
 		rd.forward(request, response);

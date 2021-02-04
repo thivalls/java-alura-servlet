@@ -3,27 +3,26 @@ package br.com.alura.gerenciador;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.alura.gerenciador.models.Empresa;
+import br.com.alura.gerenciador.models.Company;
 
 public class Banco {
-	private static List<Empresa> empresas = new ArrayList<Empresa>();
+	private static List<Company> companies = new ArrayList<Company>();
 	
 	static {
-		Empresa empresa1 = new Empresa();
+		Company empresa1 = new Company();
 		empresa1.setName("Google");
-		Empresa empresa2 = new Empresa();
+		Company empresa2 = new Company();
 		empresa2.setName("ZUP");
 		
-		empresas.add(empresa1);
-		empresas.add(empresa2);
+		companies.add(empresa1);
+		companies.add(empresa2);
 	}
 	
-	public void save(Empresa empresa) {
-		Banco.empresas.add(empresa);
-		System.out.println("salvando empresa " + empresa.getName()  + " no banco de dados");
+	public void save(Company company) {
+		Banco.companies.add(company);
 	}
 
-	public List<Empresa> getEmpresas() {
-		return Banco.empresas;
+	public List<Company> getEmpresas() {
+		return Banco.companies;
 	}
 }

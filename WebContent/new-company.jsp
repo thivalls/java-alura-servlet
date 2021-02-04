@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url value="/storeCompanies" var="linkStoreNewCompany" />
+
 <html>
 
 
@@ -6,8 +9,8 @@
 		Criando nova empresa
 	</h1>
 	
-	<form action="/gerenciador/registraEmpresa" method="post">
-		<input name="name" placeholder="Digite o nome da empresa..." />
+	<form action="${linkStoreNewCompany}" method="post">
+		<input name="name" placeholder="Type the company name..." />
 		<button type="submit">Cadastrar</button>
 	</form>
 </body>
