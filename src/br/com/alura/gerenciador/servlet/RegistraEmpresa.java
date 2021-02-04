@@ -1,8 +1,8 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,22 +47,16 @@ public class RegistraEmpresa extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter output = response.getWriter();
 		String param = request.getParameter("name");
 		
-		Empresa empresa = new Empresa();
-		empresa.setName(param);
+		Empresa company = new Empresa();
+		company.setName(param);
 		
 		Banco banco = new Banco();
-		banco.save(empresa);
+		banco.save(company);
 		
-		if(param != null && !param.contentEquals("")) {
-			output.println("<html><body><h1>Cadastrando Empresa " + param + "!!!</h1></body></html>");
-		}else {
-			output.println("<html><body><h1>Erro ao cadastrar o empresa!!!</h1></body></html>");	
-		}
-		
-		System.out.println("Entrei no servlet empresa no método post");
-		System.out.println(banco.getEmpresas());
+		RequestDispatcher rq = request.getRequestDispatcher("created-company.jsp");
+		request.setAttribute("companyName", company.getName());
+		rq.forward(request, response);
 	}
 }
