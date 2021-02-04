@@ -1,7 +1,7 @@
 package br.com.alura.gerenciador.models;
 
 
-public class Product {
+public class Empresa {
 	
 	private int id;
 	private String name;

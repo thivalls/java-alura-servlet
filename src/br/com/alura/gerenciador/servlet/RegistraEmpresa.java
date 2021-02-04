@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.Banco;
-import br.com.alura.gerenciador.models.Product;
+import br.com.alura.gerenciador.models.Empresa;
 
-@WebServlet("/product")
-public class ProductResource extends HttpServlet {
+@WebServlet("/registraEmpresa")
+public class RegistraEmpresa extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 //	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,21 +48,21 @@ public class ProductResource extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter output = response.getWriter();
-		String param = request.getParameter("product");
+		String param = request.getParameter("name");
 		
-		Product product = new Product();
-		product.setName(param);
+		Empresa empresa = new Empresa();
+		empresa.setName(param);
 		
 		Banco banco = new Banco();
-		banco.save(product);
+		banco.save(empresa);
 		
 		if(param != null && !param.contentEquals("")) {
-			output.println("<html><body><h1>Cadastrando Product " + param + "!!!</h1></body></html>");
+			output.println("<html><body><h1>Cadastrando Empresa " + param + "!!!</h1></body></html>");
 		}else {
-			output.println("<html><body><h1>Erro ao cadastrar o produto!!!</h1></body></html>");	
+			output.println("<html><body><h1>Erro ao cadastrar o empresa!!!</h1></body></html>");	
 		}
 		
-		System.out.println("Entrei no servlet product no método post");
-		System.out.println(banco.getProducts());
+		System.out.println("Entrei no servlet empresa no método post");
+		System.out.println(banco.getEmpresas());
 	}
 }
