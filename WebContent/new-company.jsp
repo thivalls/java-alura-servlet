@@ -11,6 +11,7 @@
 	
 	<form action="${linkStoreNewCompany}" method="post">
 		<input name="name" placeholder="Type the company name..." />
+		<input name="created_at" />
 		<button type="submit">Cadastrar</button>
 	</form>
 </body>

@@ -18,7 +18,7 @@ import br.com.alura.gerenciador.models.Company;
 public class ListCompany extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Banco db = new Banco();
 		List<Company> companies = db.getEmpresas();
 		request.setAttribute("companies", companies);

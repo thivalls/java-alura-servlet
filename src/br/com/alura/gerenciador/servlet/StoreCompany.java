@@ -1,6 +1,9 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,16 +21,30 @@ public class StoreCompany extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String param = request.getParameter("name");
+		String companyName = request.getParameter("name");
+		String companyCreatedAt = request.getParameter("created_at");
 		
 		Company company = new Company();
-		company.setName(param);
+		company.setName(companyName);
+		
+		Date dtCompany = null;
+		try {
+			System.out.println(companyCreatedAt);
+			SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+			dtCompany = dt.parse(companyCreatedAt);
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+		
+		company.setCreated_at(dtCompany);
 		
 		Banco banco = new Banco();
 		banco.save(company);
 		
-		RequestDispatcher rq = request.getRequestDispatcher("created-company.jsp");
-		request.setAttribute("companyName", company.getName());
-		rq.forward(request, response);
+		response.sendRedirect("companies");
+		
+//		RequestDispatcher rq = request.getRequestDispatcher("/companies");
+//		request.setAttribute("companyName", company.getName());
+//		rq.forward(request, response);
 	}
 }
