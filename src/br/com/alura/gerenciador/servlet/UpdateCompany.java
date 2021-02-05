@@ -1,31 +1,34 @@
 package br.com.alura.gerenciador.servlet;
 
+import br.com.alura.gerenciador.models.Company;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.alura.gerenciador.models.Company;
 import br.com.alura.gerenciador.persist.Banco;
 
-@WebServlet("/storeCompanies")
-public class StoreCompany extends HttpServlet {
+import java.util.Date;
+import java.util.List;
+
+@WebServlet("/update")
+public class UpdateCompany extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String companyName = request.getParameter("name");
+
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
 		String companyCreatedAt = request.getParameter("created_at");
 		
+		Banco db = new Banco();
 		Company company = new Company();
-		company.setName(companyName);
+		company.setName(name);
 		
 		Date dtCompany = null;
 		try {
@@ -38,13 +41,9 @@ public class StoreCompany extends HttpServlet {
 		
 		company.setCreated_at(dtCompany);
 		
-		Banco banco = new Banco();
-		banco.save(company);
+		db.update(Integer.parseInt(id), company);
 		
 		response.sendRedirect("companies");
-		
-//		RequestDispatcher rq = request.getRequestDispatcher("/companies");
-//		request.setAttribute("companyName", company.getName());
-//		rq.forward(request, response);
 	}
+
 }

@@ -1,4 +1,4 @@
-package br.com.alura.gerenciador;
+package br.com.alura.gerenciador.persist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,21 @@ public class Banco {
 	public void save(Company company) {
 		Banco.companies.add(company);
 	}
+	
+	public void remove(int id) {
+		Banco.companies.remove(id);
+	}
+	
+	public void update(int id, Company company) {
+		Banco.companies.set(id, company);
+	}
 
-	public List<Company> getEmpresas() {
+	public List<Company> getCompanies() {
 		return Banco.companies;
+	}
+	
+	public Company getById(int id) {
+		Company company = Banco.companies.get(id);
+		return company;
 	}
 }

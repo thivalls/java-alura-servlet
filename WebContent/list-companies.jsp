@@ -22,8 +22,12 @@
 	
 	<ul>
 	
-		<c:forEach items="${companies}" var="company">
-			<li>${ company.name } - <fmt:formatDate value="${company.created_at}" pattern="dd/MM/yyy"/> </li>
+		<c:forEach items="${companies}" var="company" varStatus="loop">
+			<li>
+				${ company.name } - <fmt:formatDate value="${company.created_at}" pattern="dd/MM/yyy"/>
+				<a href="/gerenciador/edit?id=${loop.index}">Editar</a> 
+				<a href="/gerenciador/remove?id=${loop.index}">Remover</a> 
+			</li>
 		</c:forEach>
 		
 	</ul>

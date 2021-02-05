@@ -2,8 +2,6 @@ package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
 
-import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +12,25 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.alura.gerenciador.models.Company;
 import br.com.alura.gerenciador.persist.Banco;
 
-@WebServlet("/companies")
-public class ListCompany extends HttpServlet {
+/**
+ * Servlet implementation class EditCompany
+ */
+@WebServlet("/edit")
+public class EditCompany extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Banco db = new Banco();
-		List<Company> companies = db.getCompanies();
-		request.setAttribute("companies", companies);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("list-companies.jsp");
+		Banco db = new Banco();
+		Company company = db.getById(Integer.parseInt(id));
+		
+		// creating bag
+		request.setAttribute("company", company);
+		request.setAttribute("id", id);
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("edit-company.jsp");
 		rd.forward(request, response);
 	}
 
