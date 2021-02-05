@@ -1,6 +1,7 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,11 +24,10 @@ public class EditCompany extends HttpServlet {
 		String id = request.getParameter("id");
 		
 		Banco db = new Banco();
-		Company company = db.getById(Integer.parseInt(id));
+		Company company = db.getById(Integer.valueOf(id));
 		
 		// creating bag
 		request.setAttribute("company", company);
-		request.setAttribute("id", id);
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("edit-company.jsp");

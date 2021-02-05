@@ -29,7 +29,6 @@ public class StoreCompany extends HttpServlet {
 		
 		Date dtCompany = null;
 		try {
-			System.out.println(companyCreatedAt);
 			SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
 			dtCompany = dt.parse(companyCreatedAt);
 		} catch (Exception e) {

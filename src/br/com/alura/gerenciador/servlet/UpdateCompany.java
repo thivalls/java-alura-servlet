@@ -32,7 +32,6 @@ public class UpdateCompany extends HttpServlet {
 		
 		Date dtCompany = null;
 		try {
-			System.out.println(companyCreatedAt);
 			SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
 			dtCompany = dt.parse(companyCreatedAt);
 		} catch (Exception e) {
@@ -41,7 +40,7 @@ public class UpdateCompany extends HttpServlet {
 		
 		company.setCreated_at(dtCompany);
 		
-		db.update(Integer.parseInt(id), company);
+		db.update(Integer.valueOf(id), company);
 		
 		response.sendRedirect("companies");
 	}

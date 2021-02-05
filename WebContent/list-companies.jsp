@@ -24,9 +24,10 @@
 	
 		<c:forEach items="${companies}" var="company" varStatus="loop">
 			<li>
+				#${ company.id } - 
 				${ company.name } - <fmt:formatDate value="${company.created_at}" pattern="dd/MM/yyy"/>
-				<a href="/gerenciador/edit?id=${loop.index}">Editar</a> 
-				<a href="/gerenciador/remove?id=${loop.index}">Remover</a> 
+				<a href="/gerenciador/edit?id=${ company.id }">Editar</a> 
+				<a href="/gerenciador/remove?id=${ company.id }">Remover</a> 
 			</li>
 		</c:forEach>
 		
